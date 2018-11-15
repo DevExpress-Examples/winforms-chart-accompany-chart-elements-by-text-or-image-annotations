@@ -1,3 +1,8 @@
+<!-- default file list -->
+*Files to look at*:
+
+* [Form1.cs](./CS/AnnotationsSample/Form1.cs) (VB: [Form1.vb](./VB/AnnotationsSample/Form1.vb))
+<!-- default file list end -->
 # How to accompany a chart, its pane or series point by text or image annotations
 
 
