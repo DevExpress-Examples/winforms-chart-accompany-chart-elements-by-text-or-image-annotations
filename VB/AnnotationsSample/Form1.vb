@@ -1,7 +1,9 @@
 ﻿#Region "#usings"
 Imports System
 Imports System.Drawing
+Imports System.IO
 Imports System.Windows.Forms
+Imports DevExpress.Drawing
 Imports DevExpress.XtraCharts
 ' ...
 #End Region ' #usings
@@ -14,7 +16,7 @@ Namespace AnnotationsSample
             InitializeComponent()
         End Sub
 
-        #Region "#generalcode"
+#Region "#generalcode"
         Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
             ' Add a text annotation to the chart control's repository.
             chartControl1.AnnotationRepository.Add(New TextAnnotation("Annotation 1"))
@@ -24,7 +26,7 @@ Namespace AnnotationsSample
             chartControl1.AnnotationRepository(0).AnchorPoint = New SeriesPointAnchorPoint(chartControl1.Series(0).Points(2))
 
             ' Now, create an image annotation, and add it to the chart's collection.
-            chartControl1.Annotations.AddImageAnnotation("Annotation 2", Bitmap.FromFile("...\...\image.png"))
+            chartControl1.Annotations.AddImageAnnotation("Annotation 2", DXImage.FromStream(New FileStream("...\...\image.png", FileMode.Open, FileAccess.Read, FileShare.Read)))
 
             ' Define the X and Y absolute coordinates for the annotation, in pixels.
             CType(chartControl1.Annotations(0).AnchorPoint, ChartAnchorPoint).X = 150
@@ -38,7 +40,7 @@ Namespace AnnotationsSample
             CType(chartControl1.Annotations(0).ShapePosition, FreePosition).DockCorner = DockCorner.RightTop
 
             ' Another annotation is now being added to the collection of this pane.
-            myPane.Annotations.AddImageAnnotation("Annotation 3", Bitmap.FromFile("...\...\image.png"))
+            myPane.Annotations.AddImageAnnotation("Annotation 3", DXImage.FromStream(New FileStream("...\...\image.png", FileMode.Open, FileAccess.Read, FileShare.Read)))
 
             ' Define its axis coordinates (in units appropriate for the scale type of the axes).
             CType(myPane.Annotations(0).AnchorPoint, PaneAnchorPoint).AxisXCoordinate.AxisValue = 2
@@ -70,7 +72,7 @@ Namespace AnnotationsSample
             myImageAnnotation.ShapeFillet = 10
             myImageAnnotation.ConnectorStyle = AnnotationConnectorStyle.Arrow
         End Sub
-        #End Region ' #generalcode
+#End Region ' #generalcode
 
     End Class
 End Namespace

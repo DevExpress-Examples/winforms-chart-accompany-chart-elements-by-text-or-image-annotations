@@ -1,7 +1,9 @@
 ﻿#region #usings
 using System;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
+using DevExpress.Drawing;
 using DevExpress.XtraCharts;
 // ...
 #endregion #usings
@@ -24,7 +26,7 @@ namespace AnnotationsSample {
 
             // Now, create an image annotation, and add it to the chart's collection.
             chartControl1.Annotations.AddImageAnnotation("Annotation 2",
-                Bitmap.FromFile(@"...\...\image.png"));
+                DXImage.FromStream(new FileStream(@"...\...\image.png", FileMode.Open, FileAccess.Read, FileShare.Read)));
 
             // Define the X and Y absolute coordinates for the annotation, in pixels.
             ((ChartAnchorPoint)chartControl1.Annotations[0].AnchorPoint).X = 150;
@@ -38,7 +40,8 @@ namespace AnnotationsSample {
             ((FreePosition)chartControl1.Annotations[0].ShapePosition).DockCorner = DockCorner.RightTop;
 
             // Another annotation is now being added to the collection of this pane.
-            myPane.Annotations.AddImageAnnotation("Annotation 3", Bitmap.FromFile(@"...\...\image.png"));
+            myPane.Annotations.AddImageAnnotation("Annotation 3",
+                DXImage.FromStream(new FileStream(@"...\...\image.png", FileMode.Open, FileAccess.Read, FileShare.Read)));
 
             // Define its axis coordinates (in units appropriate for the scale type of the axes).
             ((PaneAnchorPoint)myPane.Annotations[0].AnchorPoint).AxisXCoordinate.AxisValue = 2;
