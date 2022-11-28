@@ -1,75 +1,60 @@
-﻿#Region "#usings"
+'#Region "#usings"
 Imports System
 Imports System.Drawing
 Imports System.Windows.Forms
 Imports DevExpress.XtraCharts
+
 ' ...
-#End Region ' #usings
-
+'#End Region  ' #usings
 Namespace AnnotationsSample
-	Partial Public Class Form1
-		Inherits Form
-		Public Sub New()
-			InitializeComponent()
-		End Sub
 
-#Region "#generalcode"
-Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs) Handles MyBase.Load
-    ' Add a text annotation to the chart control's repository.
-    chartControl1.AnnotationRepository.Add(New TextAnnotation("Annotation 1", "Some text..."))
+    Public Partial Class Form1
+        Inherits Form
 
-    ' And, assign a series point to the annotation's AnchorPoint property.
-    ' This adds the annotation to the series point's Annotations collection.
-    chartControl1.AnnotationRepository(0).AnchorPoint = _ 
-	    New SeriesPointAnchorPoint(chartControl1.Series(0).Points(2))
+        Public Sub New()
+            InitializeComponent()
+        End Sub
 
-    ' Now, create an image annotation, and add it to the chart's collection.
-    chartControl1.Annotations.AddImageAnnotation("Annotation 2", _ 
-        Bitmap.FromFile("...\...\image.png"))
-
-    ' Define the X and Y absolute coordinates for the annotation, in pixels.
-    CType(chartControl1.Annotations(0).AnchorPoint, ChartAnchorPoint).X = 150
-    CType(chartControl1.Annotations(0).AnchorPoint, ChartAnchorPoint).Y = 150
-
-    ' Obtain the additional pane from the diagram's collection.
-    Dim myPane As XYDiagramPaneBase = (CType(chartControl1.Diagram, XYDiagram)).Panes(0)
-
-    ' And, position the chart's annotation in this pane's right top corner;
-    CType(chartControl1.Annotations(0).ShapePosition, FreePosition).DockTarget = myPane
-    CType(chartControl1.Annotations(0).ShapePosition, FreePosition).DockCorner = _ 
-        DockCorner.RightTop
-
-    ' Another annotation is now being added to the collection of this pane.
-    myPane.Annotations.AddImageAnnotation("Annotation 3", Bitmap.FromFile("...\...\image.png"))
-
-    ' Define its axis coordinates (in units appropriate for the scale type of the axes).
-    CType(myPane.Annotations(0).AnchorPoint, PaneAnchorPoint).AxisXCoordinate.AxisValue = 2
-    CType(myPane.Annotations(0).AnchorPoint, PaneAnchorPoint).AxisYCoordinate.AxisValue = 180
-
-    ' Position the annotation in relation to its anchor point.
-    CType(myPane.Annotations(0).ShapePosition, RelativePosition).Angle = -135
-    CType(myPane.Annotations(0).ShapePosition, RelativePosition).ConnectorLength = 50
-
-    ' You can get an annotation either via the collection of the element to which it is anchored,
-    ' or centrally, via the chart control's repository (e.g. by its name).
-    Dim myImageAnnotation As ImageAnnotation = _ 
-        CType(chartControl1.AnnotationRepository.GetElementByName("Annotation 3"), ImageAnnotation)
-
-    ' Enable the interactive positioning for this annotation.
-    myImageAnnotation.RuntimeMoving = True
-    myImageAnnotation.RuntimeAnchoring = True
-    myImageAnnotation.RuntimeResizing = True
-    myImageAnnotation.RuntimeRotation = True
-
-    ' Specify its image size mode.
-    myImageAnnotation.SizeMode = ChartImageSizeMode.Tile
-
-    ' And, adjust its appearance options.
-    myImageAnnotation.ShapeKind = ShapeKind.RoundedRectangle
-    myImageAnnotation.ShapeFillet = 10
-    myImageAnnotation.ConnectorStyle = AnnotationConnectorStyle.Arrow
-End Sub
-#End Region ' #generalcode
-
-	End Class
+'#Region "#generalcode"
+        Private Sub Form1_Load(ByVal sender As Object, ByVal e As EventArgs)
+            ' Add a text annotation to the chart control's repository.
+            chartControl1.AnnotationRepository.Add(New TextAnnotation("Annotation 1", "Some text..."))
+            ' And, assign a series point to the annotation's AnchorPoint property.
+            ' This adds the annotation to the series point's Annotations collection.
+            chartControl1.AnnotationRepository(0).AnchorPoint = New SeriesPointAnchorPoint(chartControl1.Series(0).Points(2))
+            ' Now, create an image annotation, and add it to the chart's collection.
+            chartControl1.Annotations.AddImageAnnotation("Annotation 2", Bitmap.FromFile("...\...\image.png"))
+            ' Define the X and Y absolute coordinates for the annotation, in pixels.
+            CType(chartControl1.Annotations(0).AnchorPoint, ChartAnchorPoint).X = 150
+            CType(chartControl1.Annotations(0).AnchorPoint, ChartAnchorPoint).Y = 150
+            ' Obtain the additional pane from the diagram's collection.
+            Dim myPane As XYDiagramPaneBase = CType(chartControl1.Diagram, XYDiagram).Panes(0)
+            ' And, position the chart's annotation in this pane's right top corner;
+            CType(chartControl1.Annotations(0).ShapePosition, FreePosition).DockTarget = myPane
+            CType(chartControl1.Annotations(0).ShapePosition, FreePosition).DockCorner = DockCorner.RightTop
+            ' Another annotation is now being added to the collection of this pane.
+            myPane.Annotations.AddImageAnnotation("Annotation 3", Bitmap.FromFile("...\...\image.png"))
+            ' Define its axis coordinates (in units appropriate for the scale type of the axes).
+            CType(myPane.Annotations(0).AnchorPoint, PaneAnchorPoint).AxisXCoordinate.AxisValue = 2
+            CType(myPane.Annotations(0).AnchorPoint, PaneAnchorPoint).AxisYCoordinate.AxisValue = 180
+            ' Position the annotation in relation to its anchor point.
+            CType(myPane.Annotations(0).ShapePosition, RelativePosition).Angle = -135
+            CType(myPane.Annotations(0).ShapePosition, RelativePosition).ConnectorLength = 50
+            ' You can get an annotation either via the collection of the element to which it is anchored,
+            ' or centrally, via the chart control's repository (e.g. by its name).
+            Dim myImageAnnotation As ImageAnnotation = CType(chartControl1.AnnotationRepository.GetElementByName("Annotation 3"), ImageAnnotation)
+            ' Enable the interactive positioning for this annotation.
+            myImageAnnotation.RuntimeMoving = True
+            myImageAnnotation.RuntimeAnchoring = True
+            myImageAnnotation.RuntimeResizing = True
+            myImageAnnotation.RuntimeRotation = True
+            ' Specify its image size mode.
+            myImageAnnotation.SizeMode = ChartImageSizeMode.Tile
+            ' And, adjust its appearance options.
+            myImageAnnotation.ShapeKind = ShapeKind.RoundedRectangle
+            myImageAnnotation.ShapeFillet = 10
+            myImageAnnotation.ConnectorStyle = AnnotationConnectorStyle.Arrow
+        End Sub
+'#End Region  ' #generalcode
+    End Class
 End Namespace
