@@ -17,7 +17,7 @@ The following example demostrates how to create text and image annotations and a
 
 ## Documentation
 
-[Annotations](https://docs.devexpress.com/WindowsForms/7858/controls-and-libraries/chart-control/annotations?v=22.2&p=netframework)
+[Annotations](https://docs.devexpress.com/WindowsForms/7858/controls-and-libraries/chart-control/annotations)
 
 ## More Examples 
 
